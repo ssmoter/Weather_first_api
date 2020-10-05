@@ -1,0 +1,217 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    .Future {
+        float:left;
+        width: 100px;
+        font-size:12px;
+    }
+
+</style>
+
+
+
+<div >
+
+    <div>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+            <form method="post">
+                <div>
+                    <label for="Wybrane_miasto">Podaj Miasto</label>
+                    <input type="text" name="Wybrane_miasto" value="" />
+                    <input type="submit" />
+
+                </div>
+            </form>
+        }
+        <p>@ViewBag.error</p>
+        <p>@ViewBag.lastError</p>
+        <p>@ViewBag.FutureError</p>
+
+        <table>
+            <tr>
+                <th>Opis &nbsp;</th>
+            </tr>
+            <tr>
+                <td> Miasto &nbsp; </td>
+
+                <td>  @ViewBag.weatherName &nbsp;</td>
+            </tr>
+            <tr>
+                <td>Państwo &nbsp;</td>
+
+                <td>@ViewBag.weatherCountry &nbsp;</td>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Wczoraj <br />&nbsp;</th>
+                <th colspan="2"><center>Różnica</center> &nbsp;</th>
+
+                <th>Dzisiaj <br />&nbsp;</th>
+                <th colspan="2"><center>Różnica</center> &nbsp;</th>
+
+                <th>Jutro <br />&nbsp;</th>
+            </tr>
+            <tr>
+                <td><hr />Aktualna temperatura &nbsp;</td>
+                <td><hr />@ViewBag.yeasterdayWeaterTemp &#x2103;</td>
+                <td><hr />o @ViewBag.yeasterdayDifferenceTempInt &#x2103;&nbsp;</td>
+                <td><hr />@ViewBag.yeasterdayDifferenceTempstring&nbsp;</td>
+                <td><hr />@ViewBag.weatherTemp &#x2103; &nbsp;</td>
+                <td><hr />o @ViewBag.futureDifferenceTempInt&#x2103; &nbsp;</td>
+                <td><hr />@ViewBag.futureDifferenceTempString&nbsp;</td>
+                <td><hr />@ViewBag.futureWeatherTemp&#x2103; &nbsp;</td>
+            </tr>
+            <tr>
+                <td><hr />Najniższa temperatura w ciągu dnia &nbsp;</td>
+                <td><hr />*&nbsp;</td>
+                <td><hr />*&nbsp;</td>
+                <td><hr />*&nbsp;</td>
+                <td><hr />@ViewBag.weatherTempMin &#x2103; &nbsp;</td>
+                <td><hr />o @ViewBag.futureDifferenceTempMinInt &#x2103; &nbsp;</td>
+                <td><hr />@ViewBag.futureDifferenceTempMinString &nbsp;</td>
+                <td><hr />@ViewBag.futureWeatherTempMin &#x2103; &nbsp;</td>
+            </tr>
+            <tr>
+                <td><hr />Najwyższa temperatura w ciągu dnia &nbsp;</td>
+                <td><hr />*&nbsp;</td>
+                <td><hr />*&nbsp;</td>
+                <td><hr />*&nbsp;</td>
+                <td><hr />@ViewBag.weatherTempMax &#x2103; &nbsp;</td>
+                <td><hr />o @ViewBag.futureDifferenceTempMaxInt &#x2103;&nbsp;</td>
+                <td><hr />@ViewBag.futureDifferenceTempMaxString &nbsp;</td>
+                <td><hr />@ViewBag.futureWeathertempMax &#x2103; &nbsp;</td>
+            </tr>
+            <tr>
+                
+                <td><hr />Odczuwalna temperatura w ciągu dnia &nbsp; &nbsp;</td>
+                <td><hr />@ViewBag.yeasterdayWeaterfeelslike &#x2103;&nbsp;</td>
+                <td><hr />o @ViewBag.yeasterdayDifferencefeelslikeInt &#x2103;&nbsp;</td>
+                <td><hr />@ViewBag.yeasterdayDifferencefeelslikeString&nbsp;</td>
+                <td><hr />@ViewBag.weatherfeelsLike &#x2103; &nbsp;</td>
+                <td><hr />o @ViewBag.futureDifferenceFeelsLikeInt &#x2103; &nbsp;</td>
+                <td><hr />@ViewBag.futureDifferenceFeelsLikeString</td>
+                <td><hr />@ViewBag.futureWeatherFeelsLike &#x2103; &nbsp;</td>
+            </tr>
+            <tr>
+                <td><hr />Ciśnienie &nbsp;</td>
+                <td><hr />@ViewBag.yeasterdayWeaterPressure hPa&nbsp;</td>
+                <td><hr />@ViewBag.yeasterdayDifferencePressureInt hPa&nbsp;</td>
+                <td><hr />@ViewBag.yeasterdayDifferencePressureString &nbsp;</td>
+                <td><hr />@ViewBag.weatherPressure hPa &nbsp;</td>
+                <td><hr />o @ViewBag.futureDifferencePressureInt hPa &nbsp;</td>
+                <td><hr />@ViewBag.futureDifferencePressureString &nbsp;</td>
+                <td><hr />@ViewBag.futureWeatherPressure hPa &nbsp;</td>
+            </tr>
+            <tr>
+                <td><hr />Wilgotność &nbsp;</td>
+                <td><hr />@ViewBag.yeasterdayWeaterHumidity %&nbsp;</td>
+                <td><hr />@ViewBag.yeasterdayDifferenceHumidityInt %&nbsp;</td>
+                <td><hr />@ViewBag.yeasterdayDifferenceHumidityString&nbsp;</td>
+                <td><hr />@ViewBag.weatherHumidity % &nbsp;</td>
+                <td><hr />o @ViewBag.futureDifferenceHumidityInt % &nbsp;</td>
+                <td><hr /> @ViewBag.futureDifferenceHumidityString &nbsp;</td>
+                <td><hr /> @ViewBag.futureWeatherHumidity % &nbsp;</td>
+            </tr>
+            <tr>
+                <td><hr />Predkość wiatru</td>
+                <td><hr />@ViewBag.yeasterdayWeaterWeaterWindSpeed m/s&nbsp;</td>
+                <td><hr />o @ViewBag.yeasterdayDifferenceWindSpeedInt m/s&nbsp;</td>
+                <td><hr />@ViewBag.yeasterdayDifferenceWindSpeedString&nbsp;</td>
+                <td><hr />@ViewBag.weatherWindSpeed m/s &nbsp;</td>
+                <td><hr />o @ViewBag.futureDifferenceWindSpeedInt m/s &nbsp;</td>
+                <td><hr />@ViewBag.futureDifferenceWindSpeedString &nbsp;</td>
+                <td><hr />@ViewBag.futureWeatherWindSpeed  m/s &nbsp;</td>
+            </tr>
+
+
+        </table>
+    </div>
+    <br /> <br />
+  
+           <div>
+             
+                   @using (Html.BeginForm("FutureWeather", "Home", FormMethod.Get))
+                       
+                   {
+                       <div style="float:left;">
+                           <p> temperatura</p>
+                           <p>Prawdopodobieństwo <br />Opadów</p>
+                       </div>
+                       <div class="Future">
+                           <button value="0" name="0">
+                               <p>@ViewBag.futureWeatherOneDay</p>
+                               <p>@ViewBag.futureWeatherOneTemp &#x2103;</p>
+                               <p>@ViewBag.futureWeatherOnePop %</p>
+                           </button>
+
+                       </div>
+
+                       <div class="Future">
+                           <button value="1" name="0">
+                               <p>@ViewBag.futureWeatherTwoDay</p>
+                               <p>@ViewBag.futureWeatherTwoTemp &#x2103;</p>
+                               <p>@ViewBag.futureWeatherTwoPop %</p>
+                           </button>
+
+                       </div>
+                       <div class="Future">
+                           <button value="2" name="0">
+                               <p>@ViewBag.futureWeatherThreeDay</p>
+                               <p>@ViewBag.futureWeatherThreeTemp &#x2103;</p>
+                               <p>@ViewBag.futureWeatherThreePop %</p>
+                           </button>
+
+                       </div>
+                       <div class="Future">
+                           <button value="3" name="0">
+                               <p>@ViewBag.futureWeatherFourDay</p>
+                               <p>@ViewBag.futureWeatherFourTemp &#x2103;</p>
+                               <p>@ViewBag.futureWeatherFourPop %</p>
+                           </button>
+
+                       </div>
+                       <div class="Future">
+                           <button value="4" name="0">
+                               <p>@ViewBag.futureWeatherFiveDay</p>
+                               <p>@ViewBag.futureWeatherFiveTemp &#x2103;</p>
+                               <p>@ViewBag.futureWeatherFivePop %</p>
+                           </button>
+
+                       </div>
+                       <div class="Future">
+                           <button value="5" name="0">
+                               <p>@ViewBag.futureWeatherSixDay</p>
+                               <p>@ViewBag.futureWeatherSixTemp &#x2103;</p>
+                               <p>@ViewBag.futureWeatherSixPop %</p>
+                           </button>
+
+                       </div>
+                       <div class="Future">
+                           <button value="6" name="0">
+                               <p>@ViewBag.futureWeatherSevenDay</p>
+                               <p>@ViewBag.futureWeatherSevenTemp &#x2103;</p>
+                               <p>@ViewBag.futureWeatherSevenPop %</p>
+                           </button>
+
+                       </div>
+                       <div class="Future">
+                           <button value="7" name="0">
+                               <p>@ViewBag.futureWeatherEightDay</p>
+                               <p>@ViewBag.futureWeatherEightTemp &#x2103;</p>
+                               <p>@ViewBag.futureWeatherEightPop %</p>
+                           </button>
+
+                       </div>
+                   }
+
+               </div>
+    
+
+
+    </div>
+
+
