@@ -244,7 +244,53 @@ namespace weatherInfo
     }
 
 
+    class Wind_direction
+    {
+        public string kierunek_wiatru(int wind_deg)
+        {
+            string wind = "niedziala";
 
+            if (0 <= wind_deg && wind_deg <= 22)
+            {
+                wind = "Wschód";
+            }
+            else if (23 <= wind_deg && wind_deg <= 67)
+            {
+                wind = "Północny-Wschód";
+            }
+            else if (68 <= wind_deg && wind_deg <= 112)
+            {
+                wind = "Północ";
+            }
+            else if (113 <= wind_deg && wind_deg <= 157)
+            {
+                wind = "Północny-Zachód";
+            }
+            else if (158 <= wind_deg && wind_deg <= 202)
+            {
+                wind = "Zachód";
+            }
+            else if (203 <= wind_deg && wind_deg <= 247)
+            {
+                wind = "Południowy-Zachód";
+            }
+            else if (248 <= wind_deg && wind_deg <= 292)
+            {
+                wind = "Południe";
+            }
+            else if (293 <= wind_deg && wind_deg <= 337)
+            {
+                wind = "Południowy-Wschód";
+            }
+            else if (338 <= wind_deg && wind_deg <= 360)
+            {
+                wind = "Wschód";
+            }
+
+            return wind;
+        }
+
+    }
 
 
     class weather
@@ -418,7 +464,7 @@ namespace weatherInfo
             try
             {
                 var client = new WebClient();
-                string url = string.Format("https://api.openweathermap.org/data/2.5/onecall?lat={0}&lon={1}&exclude=&appid={2}&units=metric"
+                string url = string.Format("https://api.openweathermap.org/data/2.5/onecall?lat={0}&lon={1}&exclude=current,minutely,hourly&appid={2}&units=metric"
                   , lat, lon, APPID_2);
                 var json = client.DownloadString(url);
                 var wynik = JsonConvert.DeserializeObject<weatherInfo.FutureWeatherInfo.root>(json);
@@ -433,5 +479,10 @@ namespace weatherInfo
 
 
     }
+
+
+
+
+
 
 }

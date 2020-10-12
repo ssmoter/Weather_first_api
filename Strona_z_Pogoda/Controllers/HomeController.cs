@@ -6,11 +6,11 @@ using weatherInfo;
 
 namespace Strona_z_Pogoda.Controllers
 {
-    
+
     public class HomeController : Controller
     {
-        static double publicLat ;
-        static double publicLon ;
+        static double publicLat;
+        static double publicLon;
         static String Nazwa_Miasta;
 
         public ActionResult Index()
@@ -389,14 +389,14 @@ namespace Strona_z_Pogoda.Controllers
 
 
             int NumberDay = Convert.ToInt32(NumberDayString);
-            #endregion
+
 
             FutureWeatherInfo.root futureWeather = new FutureWeatherInfo.root();
             FutureWeather dowloand = new FutureWeather();
-         
-                futureWeather = dowloand.DownloandFutureWeather(publicLat, publicLon);
+
+            futureWeather = dowloand.DownloandFutureWeather(publicLat, publicLon);
             ViewBag.test = publicLat + " " + publicLon;
-            
+
             UnixTime unixTime = new UnixTime();
 
 
@@ -407,8 +407,8 @@ namespace Strona_z_Pogoda.Controllers
 
                 ViewBag.Dzieńtygodnia = unixTime.AktualnyDzieńString(futureWeather.daily[NumberDay].dt);
                 ViewBag.futureWeatherDt = futureWeather.daily[NumberDay].dt;
-                ViewBag.futureWeatherSunrise = unixTime.Aktualna_Godzina(futureWeather.daily[NumberDay].sunrise,true);
-                ViewBag.futureWeatherSunset = unixTime.Aktualna_Godzina(futureWeather.daily[NumberDay].sunset,false);
+                ViewBag.futureWeatherSunrise = unixTime.Aktualna_Godzina(futureWeather.daily[NumberDay].sunrise);
+                ViewBag.futureWeatherSunset = unixTime.Aktualna_Godzina(futureWeather.daily[NumberDay].sunset);
                 ViewBag.futureWeatherTempMorn = futureWeather.daily[NumberDay].temp.morn;
                 ViewBag.futureWeatherTempDay = futureWeather.daily[NumberDay].temp.day;
                 ViewBag.futureWeatherTempEve = futureWeather.daily[NumberDay].temp.eve;
@@ -424,7 +424,10 @@ namespace Strona_z_Pogoda.Controllers
                 ViewBag.futureWeatherDewPoint = futureWeather.daily[NumberDay].dew_point;
                 ViewBag.futureWeatherWindSpeed = futureWeather.daily[NumberDay].wind_speed;
                 ViewBag.futureWeatherWindGust = futureWeather.daily[NumberDay].wind_gust;
-                ViewBag.futureWeatherWindDeg = futureWeather.daily[NumberDay].wind_deg;
+                var kierunek_wiatr = new Wind_direction().kierunek_wiatru(((int)futureWeather.daily[NumberDay].wind_deg));
+
+
+                ViewBag.futureWeatherWindDeg = kierunek_wiatr;
                 ViewBag.futureWeatherClouds = futureWeather.daily[NumberDay].clouds;
                 ViewBag.futureWeatherUvi = futureWeather.daily[NumberDay].uvi;
                 ViewBag.futureWeatherVisibility = futureWeather.daily[NumberDay].visibility;
@@ -438,6 +441,26 @@ namespace Strona_z_Pogoda.Controllers
             {
                 ViewBag.error = "Nie udało się pobrać danych";
             }
+            #endregion
+
+            string Szegulowe_dane = "1";
+            if (!Request["Wiecej_danych"].IsEmpty())
+            {
+                Szegulowe_dane = Request["Wiecej_danych"];
+            }
+            if (Szegulowe_dane == "1")
+            {
+                ViewBag.PokazSzeguloweDane = "hidden";
+                ViewBag.PokazSzeguloweDane2 = "visible";
+                ViewBag.Szegułowe_Dane = "Pokaz";
+            }
+            else if (Szegulowe_dane == "0")
+            {
+                ViewBag.PokazSzeguloweDane = "visible";
+                ViewBag.PokazSzeguloweDane2 = "hidden";
+                ViewBag.Szegułowe_Dane = "Schowaj";
+            }
+
 
 
             return View();

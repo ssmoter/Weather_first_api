@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 
 namespace Strona_z_Pogoda.Models
 {
@@ -22,106 +23,19 @@ namespace Strona_z_Pogoda.Models
 
         public string AktualnyDzieńString(double UTCTime)
         {
-            string[] DzieńTygodnia = { "Czwartek", "Piątek", "Sobota", "Niedziela", "Poniedziałek", "Wtorek", "Sroda" };
-
-
-            int IlośćDni = ((int)UTCTime / 86400);
-            int WybranyDzień = 0;
-            string Dzień = null;
-            for (int i = 0; i < IlośćDni; i++)
-            {
-                if (WybranyDzień == 7)
-                {
-                    WybranyDzień = 0;
-                }
-                else
-                {
-                    Dzień = DzieńTygodnia[WybranyDzień];
-                    WybranyDzień++;
-                }
-            }
-
-            return Dzień;
+   
+          return DateTimeOffset.FromUnixTimeSeconds((long)UTCTime).DateTime.ToLongDateString();
         }
 
 
-
-        public string Aktualna_Godzina(double UTCTime,bool rano)
+        public string Aktualna_Godzina(double UTCTime)
         {
-            int Teraz = DzisiajUnixTime();
-            int obliczona_Godzina = (int)(UTCTime - Teraz);
-            if (obliczona_Godzina < 0)
-            {
-                obliczona_Godzina = -obliczona_Godzina;
-            }
+            var Pelna_data = DateTimeOffset.FromUnixTimeSeconds((long)UTCTime).DateTime.ToLocalTime();
+            int Tylko_godzina = Pelna_data.Hour;
+            int tylko_minuta = Pelna_data.Minute;
+            string pelna_godziana = Tylko_godzina + ":" + tylko_minuta;
 
-
-
-            int sekunda = 0, minuta = 0, godzina = 0;
-
-            for (int i = 0; i < obliczona_Godzina; i++)
-            {
-                sekunda++;
-                if (sekunda == 60)
-                {
-                    sekunda = 0;
-                    minuta++;
-                    if (minuta == 60)
-                    {
-                        minuta = 0;
-                        godzina++;
-                        if (godzina == 24)
-                        {
-                            godzina = 0;
-                        }
-                    }
-                }
-            }
-
-            int sekunda_1 = 0, minuta_1 = 0, godzina_1 = 0;
-
-            for (int i = 0; i < Teraz; i++)
-            {
-                sekunda_1++;
-                if (sekunda_1 == 60)
-                {
-                    minuta_1++;
-                    sekunda_1 = 0;
-                    if (minuta_1 == 60)
-                    {
-                        minuta_1 = 0;
-                        godzina_1++;
-                        if (godzina_1 == 24)
-                        {
-                            godzina_1 = 0;
-                        }
-                    }
-                }
-            }
-
-
-
-
-            if (rano)
-            {
-                godzina = godzina_1 - godzina;
-                if (godzina < 0) { godzina = -godzina; }
-                minuta = minuta_1 - minuta;
-                if (minuta < 0) { minuta = -minuta; }
-            }
-            else
-            {
-                godzina = godzina_1 + godzina;
-                if (godzina < 0) { godzina = -godzina; }
-                minuta = minuta_1 + minuta;
-                if (minuta < 0) { minuta = -minuta; }
-            }
-
-            string GodzinaString = godzina.ToString() + ":" + minuta.ToString();
-
-
-
-            return GodzinaString;
+            return pelna_godziana;
         }
 
 

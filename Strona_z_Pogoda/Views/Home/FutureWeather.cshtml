@@ -2,115 +2,144 @@
 @{
     ViewBag.Title = "FutureWeather";
 }
+<style>
+    .Temp {
+        float: left;
+        width: 10%;
+    }
+
+    .Więcej_danych {
+        visibility: @ViewBag.PokazSzeguloweDane;
+        
+
+    }
+    .Mniej_danych{
+        visibility:@ViewBag.PokazSzeguloweDane2;
+        
+
+    }
+
+
+</style>
+
+
 
 <h2>FutureWeather</h2>
 <h3>@ViewBag.NazwaMiasta</h3>
 <p>@ViewBag.test</p>
 
+
+
+
 <div>
+
+
+
     <p>@ViewBag.error</p>
     <h3>@ViewBag.Dzieńtygodnia</h3>
     <div>
-        Wschód słońca 
-        @ViewBag.futureWeatherSunrise &nbsp;Nie Działa
+        Wschód słońca
+        @ViewBag.futureWeatherSunrise &nbsp;
     </div>
     <div>
         Zachód słońca
-        @ViewBag.futureWeatherSunset &nbsp;Nie Działa
+        @ViewBag.futureWeatherSunset &nbsp;
     </div>
-    <div>
-        Temperatura rano
-        @ViewBag.futureWeatherTempMorn &#x2103;
+    <div class="Temp">
+        <p>Temperatura:</p>
+        <p>Rzeczywista</p>
+        <p>Odczuwalna</p>
     </div>
-    <div>
-        Temperatura w ciągu dnia
-        @ViewBag.futureWeatherTempDay &#x2103;
+    <div class="Temp">
+        <p>Rano</p>
+        <p>@ViewBag.futureWeatherTempMorn &#x2103;</p>
+        <p>@ViewBag.futureWeatherFeelsLikeMorn &#x2103;</p>
     </div>
-    <div>
-        Temperatura wieczorem
-        @ViewBag.futureWeatherTempEve &#x2103;
+    <div class="Temp">
+        <p>W Ciągu Dnia</p>
+        <p>@ViewBag.futureWeatherTempDay &#x2103;</p>
+        <p>@ViewBag.futureWeatherFeelsLikeDay &#x2103;</p>
     </div>
-    <div>
-        Temperatura w nocy
-        @ViewBag.futureWeatherTempNight &#x2103;
+    <div class="Temp">
+        <p>Wieczorem</p>
+        <p>@ViewBag.futureWeatherTempEve &#x2103;</p>
+        <p>@ViewBag.futureWeatherFeelsLikeEve &#x2103;</p>
     </div>
-    <div>
-        Najniższa temeratura w ciągu dnia
-        @ViewBag.futureWeatherTempMin &#x2103;
+    <div class="Temp">
+        <p>W Nocy</p>
+        <p>@ViewBag.futureWeatherTempNight &#x2103;</p>
+        <p>@ViewBag.futureWeatherFeelsLikeNight &#x2103;</p>
     </div>
-    <div>
-        Najwyższa temperatura w ciągy dnia
-        @ViewBag.futureWeatherTempMax &#x2103;
-    </div>
-    <div>
-        Odczuwalna temperatura rano
-        @ViewBag.futureWeatherFeelsLikeMorn &#x2103;
-    </div>
-    <div>
-        Odczuwalna temperatura w ciagu dnia
-        @ViewBag.futureWeatherFeelsLikeDay &#x2103;
-    </div>
-    <div>
-        Odczuwalna temperatura wieczorem
-        @ViewBag.futureWeatherFeelsLikeEve &#x2103;
-    </div>
-    <div>
-        Odczuwalna temperatura w nocy
-        @ViewBag.futureWeatherFeelsLikeNight &#x2103;
-    </div>
-    <div>
-        Ciśnienie
-        @ViewBag.futureWeatherPressure hPa
-    </div>
-    <div>
-        Wilgotność
-        @ViewBag.futureWeatherHumidity 
-    </div>
-    <div>
-        Temperatura rosy
-        @ViewBag.futureWeatherDewPoint &#x2103;
-    </div>
-    <div>
-        Prędkość wiatru
-        @ViewBag.futureWeatherWindSpeed m/s
-    </div>
-    <div>
-        Poryw wiatru
-        @ViewBag.futureWeatherWindGust
-    </div>
-    <div>
-        Kierunek Wiatru
-        @ViewBag.futureWeatherWindDeg
-    </div>
-    <div>
-        Zachmurzenie
-        @ViewBag.futureWeatherClouds %
-    </div>
-    <div>
-        Uvi
-        @ViewBag.futureWeatherUvi
-    </div>
-    <div>
-        Widoczność
-        @ViewBag.futureWeatherVisibility km
-    </div>
-    <div>
-        Prawdopodobieństwo Opadów
-        @ViewBag.futureWeatherPop %
-    </div>
-    <div>
-        Wielkość opadów
-        @ViewBag.futureWeatherRain mm
-    </div>
-    <div>
-        Ilość Sniegu
-        @ViewBag.futureWeatherSnow mm
-    </div>
+    <p><br /><br><br /><br /><br /></p>
 
 
+    @using (Html.BeginForm("FutureWeather", "Home", FormMethod.Post))
+    {
+        <h4>Szegułowe Dane: </h4>
+        <button name="Wiecej_danych" value="1" class="Więcej_danych";>
+            @ViewBag.Szegułowe_Dane
+        </button>
+        <button name="Wiecej_danych" value="0" class="Mniej_danych">
+            @ViewBag.Szegułowe_Dane
+        </button>
 
-
-
-
-
+        <div style="visibility:@ViewBag.PokazSzeguloweDane">
+            <p>
+                Najniższa temeratura w ciągu dnia
+                @ViewBag.futureWeatherTempMin &#x2103;
+            </p>
+            <p>
+                Najwyższa temperatura w ciągy dnia
+                @ViewBag.futureWeatherTempMax &#x2103;
+            </p>
+            <p>
+                Ciśnienie
+                @ViewBag.futureWeatherPressure hPa
+            </p>
+            <p>
+                Wilgotność
+                @ViewBag.futureWeatherHumidity
+            </p>
+            <p>
+                Temperatura rosy
+                @ViewBag.futureWeatherDewPoint &#x2103;
+            </p>
+            <p>
+                Prędkość wiatru
+                @ViewBag.futureWeatherWindSpeed m/s
+            </p>
+            <p>
+                Poryw wiatru
+                @ViewBag.futureWeatherWindGust
+            </p>
+            <p>
+                Kierunek Wiatru
+                @ViewBag.futureWeatherWindDeg
+            </p>
+            <p>
+                Zachmurzenie
+                @ViewBag.futureWeatherClouds %
+            </p>
+            <p>
+                Uvi
+                @ViewBag.futureWeatherUvi
+            </p>
+            <p>
+                Widoczność
+                @ViewBag.futureWeatherVisibility km
+            </p>
+            <p>
+                Prawdopodobieństwo Opadów
+                @ViewBag.futureWeatherPop %
+            </p>
+            <p>
+                Wielkość opadów
+                @ViewBag.futureWeatherRain mm
+            </p>
+            <p>
+                Ilość Sniegu
+                @ViewBag.futureWeatherSnow mm
+            </p>
+        </div>
+    }
 </div>
